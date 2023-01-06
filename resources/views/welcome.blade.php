@@ -48,7 +48,7 @@
                         <form action="{{ route('delete.book', $book->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger">Delete s</button>
+                            <button type="submit" class="btn btn-danger">Delete ssesuatu</button>
                         </form>
                     </div>
                 </div>  
