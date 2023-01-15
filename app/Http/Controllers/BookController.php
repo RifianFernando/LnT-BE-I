@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class BookController 
+class BookController
 {
     function home()
     {
         $books = Book::all();
+        $category = category::all();
         // $test = 'test';
         // dd($books);
         // var_dump($books);
@@ -22,29 +24,35 @@ class BookController
 
         #cara kedua
         // dd($books);
-        return view('welcome',[
-            'books'=> $books
+        // dd($category);
+        return view('welcome', [
+            'books' => $books,
+            'category' => $category
         ]);
     }
 
     function createViewPage()
     {
 
-        return view('create');
+        return view('create', [
+            'categories' => category::all()
+        ]);
     }
 
-    function createBook(Request $request){
+    function createBook(Request $request)
+    {
         Book::create([
-            'title' =>$request->title,
-            'stock' =>$request->stock,
-            'writer' =>$request->writer
+            'title' => $request->title,
+            'stock' => $request->stock,
+            'writer' => $request->writer,
+            'category_id' => $request->category_id
         ]);
 
         return redirect(route('home'));
     }
 
     function updateViewPage($id)
-    {   
+    {
         // dd($id);
         // $book = DB::table('books')->select('*');
         // $books = Book::all();
@@ -53,23 +61,25 @@ class BookController
         // dd($book);
 
         return view('update', [
-            'book'=> $book
+            'book' => $book
         ]);
     }
 
-    function updateBook(Request $request, $id){
+    function updateBook(Request $request, $id)
+    {
         // dd($request);
         $book = Book::find($id);
         $book->update([
-            'title' =>$request->title,
-            'stock' =>$request->stock,
-            'writer' =>$request->writer
+            'title' => $request->title,
+            'stock' => $request->stock,
+            'writer' => $request->writer
         ]);
-        
+
         return redirect(route('home'));
     }
 
-    function deleteBook($id){
+    function deleteBook($id)
+    {
         $book = Book::find($id);
         $book->delete();
 

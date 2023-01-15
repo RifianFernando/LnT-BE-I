@@ -26,6 +26,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">create book</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">create category</a>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -34,24 +37,33 @@
             </div>
         </div>
     </nav>
-
-
-<form action="/create-book" method="post">
-    @csrf
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Title</label>
-        <input name="title" class="form-control" type="text" id="formFile">
-    </div>
-    <div class="mb-3">
-        <label for="formFileMultiple" class="form-label">Stock</label>
-        <input name="stock" class="form-control" type="number" id="formFileMultiple" multiple>
-    </div>
-    <div class="mb-3">
-        <label for="formFileMultiple" class="form-label">Writer</label>
-        <input name="writer" class="form-control" type="text" id="formFileMultiple" multiple>
-    </div>
-    <input type="submit" value="submit">
-</form>
+    <form action="/create-book" method="post">
+        @csrf
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Title</label>
+            <input name="title" class="form-control" type="text" id="formFile">
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Stock</label>
+            <input name="stock" class="form-control" type="number" id="formFileMultiple" multiple>
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Writer</label>
+            <input name="writer" class="form-control" type="text" id="formFileMultiple" multiple>
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Category Book</label>
+            <select class="form-select" name="category_id" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                @forelse ($categories as $kategori)
+                    <option value="{{ $kategori->id }}">{{ $kategori->categoryName }}</option>
+                @empty
+                    <option>No category found</option>
+                @endforelse
+            </select>
+        </div>
+        <input type="submit" value="submit">
+    </form>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

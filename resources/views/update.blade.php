@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -26,6 +27,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">create book</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">create category</a>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -34,25 +38,25 @@
             </div>
         </div>
     </nav>
-
-
-<form action="{{ route('update.book', $book->id) }}" method="post">
-    @csrf
-    @method('patch')
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Title</label>
-        <input name="title" value="{{ $book->title }}" class="form-control" type="text" id="formFile">
-    </div>
-    <div class="mb-3">
-        <label for="formFileMultiple" class="form-label">Stock</label>
-        <input name="stock" value="{{ $book->stock }}" class="form-control" type="number" id="formFileMultiple" multiple>
-    </div>
-    <div class="mb-3">
-        <label for="formFileMultiple" class="form-label">Writer</label>
-        <input name="writer"  value="{{ $book->writer }}" class="form-control" type="text" id="formFileMultiple" multiple>
-    </div>
-    <input type="submit" value="submit">
-</form>
+    <form action="{{ route('update.book', $book->id) }}" method="post">
+        @csrf
+        @method('patch')
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Title</label>
+            <input name="title" value="{{ $book->title }}" class="form-control" type="text" id="formFile">
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Stock</label>
+            <input name="stock" value="{{ $book->stock }}" class="form-control" type="number" id="formFileMultiple"
+                multiple>
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Writer</label>
+            <input name="writer" value="{{ $book->writer }}" class="form-control" type="text" id="formFileMultiple"
+                multiple>
+        </div>
+        <input type="submit" value="submit">
+    </form>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

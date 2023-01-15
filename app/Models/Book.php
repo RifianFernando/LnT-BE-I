@@ -12,7 +12,12 @@ class Book extends Model
     protected $fillable = [
         'title',
         'stock',
-        'writer'
+        'writer',
+        'category_id'
     ];
 
+
+    public function category(){
+        return $this->hasMany(category::class, 'foreign_key');
+    }
 }

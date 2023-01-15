@@ -10,9 +10,6 @@
 </head>
 
 <body>
-
-    {{-- @include('Navbar') --}}
-    {{-- @yield('content') --}}
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -27,10 +24,10 @@
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('create.book') }}">create book</a>
+                        <a class="nav-link" href="#">create book</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('category.view') }}">create category</a>
+                        <a class="nav-link" href="">create category</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -40,39 +37,14 @@
             </div>
         </div>
     </nav>
-
-    <div class="d-flex flex-wrap justify-content-start gap-4 p-5">
-        @foreach ($books as $book)
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $book->title }}</h5>
-                    <p class="card-text">{{ $book->stock }}</p>
-                    <p class="card-text">{{ $book->writer }}</p>
-                    @php
-                    $categoryName = 'test';
-                    $i = 0;
-                        foreach ($books as $book) {
-                            if ($book->category_id == $category[$i]->id) {
-                                $categoryName = $category[$i]->categoryName;
-                            }
-                            $i++;
-                        }
-                    @endphp
-                    <p class="card-text">{{ $categoryName }}</p>
-                    <div class="d-flex gap-2">
-                        <a href="{{ route('update.view', $book->id) }}" class="btn btn-warning">edit</a>
-                        <form action="{{ route('delete.book', $book->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger">Delete ssesuatu</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-
+    <form action="{{ route('category.create') }}" method="post">
+        @csrf
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Category Name</label>
+            <input name="categoryName" name="title" class="form-control" type="text" id="formFile">
+        </div>
+        <input type="submit" value="submit">
+    </form>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
