@@ -11,35 +11,7 @@
 
 <body>
 
-    {{-- @include('Navbar') --}}
-    {{-- @yield('content') --}}
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('create.book') }}">create book</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('category.view') }}">create category</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
+    @include('navbar.navigation')
 
     <div class="d-flex flex-wrap justify-content-start gap-4 p-5">
         @foreach ($books as $book)
@@ -49,17 +21,7 @@
                     <h5 class="card-title">{{ $book->title }}</h5>
                     <p class="card-text">{{ $book->stock }}</p>
                     <p class="card-text">{{ $book->writer }}</p>
-                    @php
-                    $categoryName = 'test';
-                    $i = 0;
-                        foreach ($books as $book) {
-                            if ($book->category_id == $category[$i]->id) {
-                                $categoryName = $category[$i]->categoryName;
-                            }
-                            $i++;
-                        }
-                    @endphp
-                    <p class="card-text">{{ $categoryName }}</p>
+                    <p class="card-text">{{ $book->category->categoryName }}</p>
                     <div class="d-flex gap-2">
                         <a href="{{ route('update.view', $book->id) }}" class="btn btn-warning">edit</a>
                         <form action="{{ route('delete.book', $book->id) }}" method="post">

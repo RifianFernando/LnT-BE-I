@@ -1,6 +1,3 @@
-
-@extends('Navbar')
-@section('content')
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -14,10 +11,10 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">create book</a>
+                    <a class="nav-link" href="{{ route('create.book') }}">create book</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">create category</a>
+                    <a class="nav-link" href="{{ route('category.view') }}">create category</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
@@ -27,4 +24,3 @@
         </div>
     </div>
 </nav>
-@endsection

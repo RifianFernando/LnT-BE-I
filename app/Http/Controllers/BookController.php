@@ -12,7 +12,6 @@ class BookController
     function home()
     {
         $books = Book::all();
-        $category = category::all();
         // $test = 'test';
         // dd($books);
         // var_dump($books);
@@ -26,8 +25,7 @@ class BookController
         // dd($books);
         // dd($category);
         return view('welcome', [
-            'books' => $books,
-            'category' => $category
+            'books' => $books
         ]);
     }
 
@@ -61,7 +59,8 @@ class BookController
         // dd($book);
 
         return view('update', [
-            'book' => $book
+            'book' => $book,
+            'categories' => category::all()
         ]);
     }
 
@@ -72,7 +71,8 @@ class BookController
         $book->update([
             'title' => $request->title,
             'stock' => $request->stock,
-            'writer' => $request->writer
+            'writer' => $request->writer,
+            'category_id' => $request->category_id
         ]);
 
         return redirect(route('home'));

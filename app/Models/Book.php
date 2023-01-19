@@ -17,7 +17,8 @@ class Book extends Model
     ];
 
 
-    public function category(){
-        return $this->hasMany(category::class, 'foreign_key');
+    public function category()
+    {
+        return $this->belongsTo(category::class);
     }
 }
