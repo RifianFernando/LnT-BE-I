@@ -7,12 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <title>L&C Book Store</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
 
     @include('navbar.navigation')
-    <form action="/create-book" method="post">
+    <form action="{{ route('createBook') }}" method="post">
         @csrf
         <div class="mb-3">
             <label for="formFile" class="form-label">Title</label>
@@ -23,15 +24,22 @@
             <input name="stock" class="form-control" type="number" id="formFileMultiple" multiple>
         </div>
         <div class="mb-3">
-            <label for="formFileMultiple" class="form-label">Writer</label>
-            <input name="writer" class="form-control" type="text" id="formFileMultiple" multiple>
-        </div>
-        <div class="mb-3">
             <label for="formFileMultiple" class="form-label">Category Book</label>
             <select class="form-select" name="category_id" aria-label="Default select example">
                 <option selected>Open this select menu</option>
                 @forelse ($categories as $kategori)
                     <option value="{{ $kategori->id }}">{{ $kategori->categoryName }}</option>
+                @empty
+                    <option>No category found</option>
+                @endforelse
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Book Author</label>
+            <select class="form-select" name="category_id" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                @forelse ($authors as $author)
+                    <option value="{{ $author->id }}">{{ $author->name }}</option>
                 @empty
                     <option>No category found</option>
                 @endforelse

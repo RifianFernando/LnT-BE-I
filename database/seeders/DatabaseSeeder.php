@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Faker\Generator as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +22,21 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // $faker = Faker::create('id_ID');
+
+        DB::table('authors')->insert([
+            'name' => 'Rifian',
+            'birth_of_date' => '2023/10/10',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('authors')->insert([
+            'name' => 'Hori',
+            'birth_of_date' => '2023/10/10',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

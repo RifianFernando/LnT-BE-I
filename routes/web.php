@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AuthorJoinTableController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +28,7 @@ Route::get('/', [BookController::class, 'home'])->name('home');
 
 //page create
 Route::get('/create', [BookController::class, 'createViewPage'])->name('create.book');
-Route::post('/create-book', [BookController::class, 'createBook']);
+Route::post('/create-book', [BookController::class, 'createBook'])->name('createBook');
 
 //page update (edit)
 Route::get('/update/{id}', [BookController::class, 'updateViewPage'])->name('update.view'); //view logic
@@ -39,3 +41,8 @@ Route::delete('/delete/{id}', [BookController::class, 'deleteBook'])->name('dele
 //create category
 Route::get('/create-category', [CategoryController::class, 'index'])->name('category.view'); //view logic
 Route::post('/create-category', [CategoryController::class, 'create'])->name('category.create');//view logic
+
+
+//create author
+Route::get('/create-author', [AuthorController::class, 'index'])->name('author.view'); //view logic
+Route::post('/author-maked', [AuthorController::class, 'create'])->name('author.create');

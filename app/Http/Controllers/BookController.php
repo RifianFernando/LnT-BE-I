@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+// use PharIo\Manifest\Author;
+use App\Models\author;
 
 class BookController
 {
@@ -33,7 +35,8 @@ class BookController
     {
 
         return view('create', [
-            'categories' => category::all()
+            'categories' => category::all(),
+            'authors' => author::all()
         ]);
     }
 
@@ -42,9 +45,15 @@ class BookController
         Book::create([
             'title' => $request->title,
             'stock' => $request->stock,
-            'writer' => $request->writer,
             'category_id' => $request->category_id
         ]);
+
+        // DB::table('books')->create([
+        //     'title' => $request->title,
+        //     'stock' => $request->stock,
+        //     'writer' => $request->writer,
+        //     'category_id' => $request->category_id
+        // ]);
 
         return redirect(route('home'));
     }
@@ -71,7 +80,6 @@ class BookController
         $book->update([
             'title' => $request->title,
             'stock' => $request->stock,
-            'writer' => $request->writer,
             'category_id' => $request->category_id
         ]);
 
@@ -81,6 +89,7 @@ class BookController
     function deleteBook($id)
     {
         $book = Book::find($id);
+        // dd($book);
         $book->delete();
 
         return redirect(route('home'));

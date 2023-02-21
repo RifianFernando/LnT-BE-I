@@ -25,11 +25,6 @@
             <input name="stock" value="{{ $book->stock }}" class="form-control" type="number" id="formFileMultiple"
                 multiple>
         </div>
-        <div class="mb-3">
-            <label for="formFileMultiple" class="form-label">Writer</label>
-            <input name="writer" value="{{ $book->writer }}" class="form-control" type="text" id="formFileMultiple"
-                multiple>
-        </div>
 
         <div class="mb-3">
             <label for="formFileMultiple" class="form-label">Category Book</label>
