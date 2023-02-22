@@ -14,9 +14,9 @@
     @include('navbar.navigation')
 
     <div class="d-flex flex-wrap justify-content-start gap-4 p-5">
-        @foreach ($books as $book => $authors)
+        @foreach ($books as $book)
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{{ asset('storage/'.$book->bookImg) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ $book->title }}</h5>
                     <p class="card-text">{{ $book->stock }}</p>
@@ -26,15 +26,7 @@
                         <form action="{{ route('delete.book', $book->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger">Delete ssesuatu</button>
-                        </form>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <a href="{{ route('update.view', $book->id) }}" class="btn btn-warning">edit</a>
-                        <form action="{{ route('delete.book', $book->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger">Delete ssesuatu</button>
+                            <button type="submit" class="btn btn-danger">Delete sesuatu</button>
                         </form>
                     </div>
                 </div>

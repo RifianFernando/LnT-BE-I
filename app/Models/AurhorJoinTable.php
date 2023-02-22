@@ -9,6 +9,7 @@ class AuthorJoinTable extends Model
 {
     use HasFactory;
 
+    public $table = 'author_join_table';
     protected $fillable = [
         'book_id',
         'author_id'

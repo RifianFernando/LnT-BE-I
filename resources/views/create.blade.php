@@ -13,7 +13,7 @@
 <body>
 
     @include('navbar.navigation')
-    <form action="{{ route('createBook') }}" method="post">
+    <form action="{{ route('createBook') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="formFile" class="form-label">Title</label>
@@ -22,6 +22,10 @@
         <div class="mb-3">
             <label for="formFileMultiple" class="form-label">Stock</label>
             <input name="stock" class="form-control" type="number" id="formFileMultiple" multiple>
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Img</label>
+            <input name="bookImg" class="form-control" type="file" id="formFileMultiple" multiple>
         </div>
         <div class="mb-3">
             <label for="formFileMultiple" class="form-label">Category Book</label>
@@ -36,7 +40,7 @@
         </div>
         <div class="mb-3">
             <label for="formFileMultiple" class="form-label">Book Author</label>
-            <select class="form-select" name="category_id" aria-label="Default select example">
+            <select class="form-select" name="author_id" aria-label="Default select example">
                 <option selected>Open this select menu</option>
                 @forelse ($authors as $author)
                     <option value="{{ $author->id }}">{{ $author->name }}</option>

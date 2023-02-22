@@ -22,9 +22,13 @@ class AuthorJoinTableController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($author_id, $book_id)
     {
-        //
+
+        // $book = AuthorJoinTable::create([
+        //     'book_id' => $book_id,
+        //     'author_id' => $author_id
+        // ]);
     }
 
     /**

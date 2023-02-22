@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('Author_BookJoinTable', function (Blueprint $table) {
+        Schema::create('author_join_table', function (Blueprint $table) {
             $table->id();
             $table->foreignId('book_id')
                 ->references('id')
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Author_BookJoinTable');
+        Schema::dropIfExists('author_join_table');
     }
 };

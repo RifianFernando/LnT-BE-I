@@ -8,13 +8,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 // use PharIo\Manifest\Author;
 use App\Models\author;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Contracts\Service\Attribute\Required;
+use Illuminate\Support\Str;
 
 class BookController
 {
+
     function home()
     {
         $books = Book::all();
-        // $test = 'test';
         // dd($books);
         // var_dump($books);
 
@@ -40,13 +44,33 @@ class BookController
         ]);
     }
 
-    function createBook(Request $request)
+    function createBook(Request $request, AuthorJoinTableController $AuthorJoinTableController): RedirectResponse
     {
-        Book::create([
+        // dd($request->bookImg);
+        $required = 'required';
+        $request->validate([
+            'title' => $required,
+            'stock' => $required,
+            'category_id' => $required,
+            'author_id' => $required,
+            'bookImg' => 'required|mimes:jpeg,jpg,gif,png'
+        ]);
+
+        $img = $request->file('bookImg')->getClientOriginalName();
+        $newNameBookImg = Str::random(10) . '_' . $img;
+        $request->file('bookImg')->storeAs('public/', $newNameBookImg);
+
+        // dd($newNameBookImg);
+
+        $book = Book::create([
             'title' => $request->title,
             'stock' => $request->stock,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'bookImg' => $newNameBookImg
         ]);
+
+        $AuthorJoinTableController->create($request->author_id, $book->id);
+
 
         // DB::table('books')->create([
         //     'title' => $request->title,
