@@ -38,5 +38,13 @@ class DatabaseSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('categories')->insert([
+            'categoryName' => 'Romance'
+        ]);
+
+        DB::table('categories')->insert([
+            'categoryName' => 'Horror'
+        ]);
     }
 }

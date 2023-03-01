@@ -29,6 +29,7 @@ class AuthorJoinTableController
         //     'book_id' => $book_id,
         //     'author_id' => $author_id
         // ]);
+        // return $book;
     }
 
     /**
