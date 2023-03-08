@@ -4,6 +4,9 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthorJoinTableController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +49,33 @@ Route::post('/create-category', [CategoryController::class, 'create'])->name('ca
 //create author
 Route::get('/create-author', [AuthorController::class, 'index'])->name('author.view'); //view logic
 Route::post('/author-maked', [AuthorController::class, 'create'])->name('author.create');
+
+//register
+// Route::get('/register', [RegisterController::class, 'registerView'])->name('auth.register.view'); //view logic
+// Route::post('/register/now', [RegisterController::class, 'register'])->name('auth.register');
+
+// //login
+// Route::get('/login', [LoginController::class, 'loginView'])->name('auth.login.view'); //view logic
+// Route::post('/login/now', [LoginController::class, 'login'])->name('auth.login');
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

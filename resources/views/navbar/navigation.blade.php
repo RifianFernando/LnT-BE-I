@@ -24,6 +24,18 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            {{-- @if(Session::has('login'))
+                <a href="{{ route('auth.register.view') }}">
+                    <button class="btn btn-outline-success" type="submit">
+                        Register
+                    </button>
+                </a>
+                <a href="{{ route('auth.login.view') }}">
+                    <button class="btn btn-outline-success" type="submit">
+                        Login
+                    </button>
+                </a>
+            @endif --}}
         </div>
     </div>
 </nav>
