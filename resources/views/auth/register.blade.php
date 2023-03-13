@@ -36,12 +36,12 @@
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
 
-            {{-- @error('password')
+            @error('password')
                 <p>{{ $message }}</p>
-            @enderror --}}
-            @if($errors = $validator->errors())
-                {{$errors}}
             @enderror
+            {{-- @if($errors = $validator->errors())
+                {{$errors}}
+            @enderror --}}
         </div>
 
         <div class="flex items-center justify-end mt-4">
