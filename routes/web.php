@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiSendEmailController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\AuthorJoinTableController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -30,12 +32,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [BookController::class, 'home'])->name('home');
 
 //page create
-Route::get('/create', [BookController::class, 'createViewPage'])->name('create.book');
-Route::post('/create-book', [BookController::class, 'createBook'])->name('createBook');
+//group middleware
+Route::middleware([AdminMiddleware::class, 'auth'])->group(
+    function () {
 
-//page update (edit)
-Route::get('/update/{id}', [BookController::class, 'updateViewPage'])->name('update.view'); //view logic
-Route::patch('/update-book/{id}', [BookController::class, 'updateBook'])->name('update.book'); //patch update book method
+        Route::get('/create', [BookController::class, 'createViewPage'])->name('create.book');
+
+        Route::post('/create-book', [BookController::class, 'createBook'])->name('createBook');
+        //page update (edit)
+        Route::get('/update/{id}', [BookController::class, 'updateViewPage'])->name('update.view'); //view logic
+        Route::patch('/update-book/{id}', [BookController::class, 'updateBook'])->name('update.book'); //patch update book method
+    }
+);
 
 //delete method
 Route::delete('/delete/{id}', [BookController::class, 'deleteBook'])->name('delete.book');
@@ -43,12 +51,13 @@ Route::delete('/delete/{id}', [BookController::class, 'deleteBook'])->name('dele
 
 //create category
 Route::get('/create-category', [CategoryController::class, 'index'])->name('category.view'); //view logic
-Route::post('/create-category', [CategoryController::class, 'create'])->name('category.create');//view logic
+Route::post('/create-category', [CategoryController::class, 'create'])->name('category.create'); //view logic
 
 
 //create author
 Route::get('/create-author', [AuthorController::class, 'index'])->name('author.view'); //view logic
 Route::post('/author-maked', [AuthorController::class, 'create'])->name('author.create');
+
 
 //register
 // Route::get('/register', [RegisterController::class, 'registerView'])->name('auth.register.view'); //view logic
@@ -78,4 +87,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

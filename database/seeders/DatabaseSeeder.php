@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,6 +29,15 @@ class DatabaseSeeder extends Seeder
         DB::table('authors')->insert([
             'name' => 'Rifian',
             'birth_of_date' => '2023/10/10',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'tahugaring29@gmail.com',
+            'password' => Hash::make('TESTINGAKUN'),
+            'roles' => 'admin',
             'created_at' => now(),
             'updated_at' => now()
         ]);

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookControllerApi;
+use App\Http\Controllers\ApiSendEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::get('/', [BookControllerApi::class, 'test']);
 Route::post('/create-book', [BookControllerApi::class, 'createBook']);
 Route::post('/update-buku/{id}', [BookControllerApi::class, 'updateBook']); //patch update book method
 Route::delete('/delete-api/{id}', [BookControllerApi::class, 'deleteBook']);
+//send email
+Route::post('/send-email/{id}', [ApiSendEmailController::class, 'store']);
